@@ -1,1 +1,1 @@
-Bring pack the love
+Bring back the love for Django
