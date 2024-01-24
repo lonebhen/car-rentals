@@ -6,6 +6,7 @@ cryptography==41.0.7
 defusedxml==0.7.1
 Django==5.0.1
 django-allauth==0.60.1
+django-cors-headers==4.3.1
 django-rest-framework==0.1.0
 djangorestframework==3.14.0
 idna==3.6
