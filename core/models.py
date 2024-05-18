@@ -1,11 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
+from cloudinary.models import CloudinaryField
 # Create your models here.
 
 
 
 class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=15)
     address = models.TextField()
 
@@ -16,9 +17,13 @@ class Customer(models.Model):
 class Car(models.Model):
     make = models.CharField(max_length=50)
     model = models.CharField(max_length=50)
+    image = CloudinaryField('image')
+    image2 = CloudinaryField('image')
+    image3 = CloudinaryField('image')
     year = models.PositiveIntegerField()
     registration_number = models.CharField(max_length=20, unique=True)
     color = models.CharField(max_length=20)
+    daily_rate = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     availability = models.BooleanField(default=True)
 
 
@@ -35,6 +40,7 @@ class RentalReservation(models.Model):
     total_cost = models.DecimalField(max_digits=10, decimal_places=2)
     is_active = models.BooleanField(default=True)
     reservation_date = models.DateTimeField(auto_now_add=True)
+    approved = models.BooleanField(default=False)
 
     def __str__(self):
         return f"Reservation for {self.customer} - {self.car} ({self.pickup_date} to {self.return_date})"

@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +46,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    
+    'cloudinary_storage',
+    'cloudinary',
 
 
     # personal
@@ -131,6 +137,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# MEDIA_URL = '/media/'  
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -138,6 +147,24 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'accounts.User'
+
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': 'dw9glfqj3',
+#     'API_KEY': '799427744631391',
+#     'API_SECRET': 'Qix4xFKLLRXFbl1hhetnD7OUv98'
+# }
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
 
 
 AUTHENTICATION_BACKENDS = (

@@ -1,2 +1,12 @@
 venv/
+.env
 todo.txt
+
+*.log
+*.pot
+*.pyc
+__pycache__/*.pyc
+
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
