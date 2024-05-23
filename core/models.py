@@ -1,12 +1,13 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 from django.conf import settings
 from cloudinary.models import CloudinaryField
 # Create your models here.
 
-
+User = get_user_model()
 
 class Customer(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=15)
     address = models.TextField()
 
@@ -28,12 +29,12 @@ class Car(models.Model):
 
 
     def __str__(self):
-        return f"{self.year} {self.make} {self.model}"
+        return f"{self.make} - {self.model} - {self.registration_number}"
     
 
 
 class RentalReservation(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     pickup_date = models.DateField()
     return_date = models.DateField()

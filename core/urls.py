@@ -1,8 +1,9 @@
 from django.urls import path
-from .views import CarView, CarDetailView, CarSearchAPIView, BookCarAPIView, UserRentalBookingsAPIView, ApprovedUserRentalBookingsAPIView
+from .views import CarView, CarDetailView, CarSearchAPIView, BookCarAPIView, UserRentalBookingsAPIView, ApprovedUserRentalBookingsAPIView, UserView
 
 
 urlpatterns = [
+    path('user/',UserView.as_view(), name='get_user'),
     path('cars/',CarView.as_view(), name='cars'),
     path('cars/<int:pk>/', CarDetailView.as_view(), name='car-detail'),
     path('cars/search/', CarSearchAPIView.as_view(), name='car_search'),
