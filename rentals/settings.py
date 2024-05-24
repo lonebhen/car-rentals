@@ -205,7 +205,7 @@ EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 
-AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL =  "accounts.User"
 
 
 REST_FRAMEWORK = {
