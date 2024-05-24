@@ -63,7 +63,7 @@ INSTALLED_APPS = [
 
     # project apps
 
-    'accounts.apps.AccountsConfig',
+    'accounts',
     'core.apps.CoreConfig',
 ]
 
