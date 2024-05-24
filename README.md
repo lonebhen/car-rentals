@@ -1,1 +1,1 @@
-Bring back the love for Django
+Car Rentals API
