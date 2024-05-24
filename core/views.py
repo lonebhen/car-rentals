@@ -107,38 +107,29 @@ class BookCarAPIView(APIView):
     permission_classes = [IsAuthenticated]
     
     def post(self, request):
-        # Get the authenticated user
         user = request.user
         print(user)
-        # Retrieve the associated Customer object
         
         try:
             print(f"User id is {user.id}")
             print(type(user.id))
             customer = User.objects.get(pk=user.id)
             
-            print(f"Customer id is {customer.pk}")
-            print(f"Customer is {customer}")
         except User.DoesNotExist:
             return Response({"message": "Customer not found"}, status=status.HTTP_400_BAD_REQUEST)
         
         
 
-        
-        # Add customer to the request data
+    
         request.data['customer'] = customer.id
         
         serializer = RentalReservationSerializer(data=request.data)
         
         if serializer.is_valid():
-            print("here")
             print(f"Serialized data is {serializer.validated_data}")
             car_id = serializer.validated_data.get('car')
-            print(f"Car id is {car_id}")
             car = get_object_or_404(Car, id=car_id.id)
             
-            print(f"Car: {car}")
-            print(f"Car id is {car.id}")
             
             if not car.availability:
                 return Response({"message": "Car is not available for booking"}, status=status.HTTP_400_BAD_REQUEST)
